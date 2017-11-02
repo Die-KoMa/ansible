@@ -1,0 +1,24 @@
+all:
+  hosts:
+    valhalla.fs.tum.de:
+      ansible_user: beinke
+      mediawiki_path: /homewww/die-koma.org/wiki-beta
+      mediawiki_ro_lock_dir: ReadOnly
+      mediawiki_ro_file: msg
+      borg_user: bup
+      borg_host: borg-backup
+      borg_remote_path: ~/koma
+      borg_repo: bup@janbeinke.com:~/koma
+      borg_password: !vault |
+        $ANSIBLE_VAULT;1.2;AES256;beinke
+        66356536663861373933623436313830346438383866383264623962343737643963363765343232
+        3262643830363337303635376236623336663636656234340a623262343266333333393465323533
+        38393238326465303432393763643538646135373136653031643634343763656639653133363564
+        3235626134326632380a316562653565633736326266633138333235316435623538646232323136
+        61653938646464346662346430666166346663303732393530643733353732356266
+    janbeinke.com:
+      borg_user: bup
+  children:
+    backup:
+      hosts:
+        janbeinke.com

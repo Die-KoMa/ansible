@@ -1,0 +1,2 @@
+dependencies:
+- { role: borg-scripts, borg_install_path: "{{bin_dir}}" }

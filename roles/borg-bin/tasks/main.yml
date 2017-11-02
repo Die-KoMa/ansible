@@ -1,0 +1,24 @@
+- name: Download the gpg key for verification of borg
+  command: gpg --no-default-keyring --keyring {{borg_gpg_keyring}} --receive-keys {{borg_gpg_fingerprint}}
+  args:
+    creates: "{{borg_gpg_keyring}}"
+
+- name: Download borg v{{borg_version}}, verify and install it under {{borg_install_path}}
+  shell: |
+    set -e
+    tmp=`mktemp --directory`
+    cd $tmp
+
+    trap "cd /tmp; rm $tmp/{{borg_executable}}; rm $tmp/{{borg_executable}}.asc; rmdir $tmp" EXIT
+
+    wget --no-verbose https://github.com/borgbackup/borg/releases/download/{{borg_version}}/{{borg_executable}}
+    wget --no-verbose https://github.com/borgbackup/borg/releases/download/{{borg_version}}/{{borg_executable}}.asc
+
+    gpg --no-default-keyring --keyring {{borg_gpg_keyring}} --verify {{borg_executable}}.asc
+
+    chmod +x {{borg_executable}}
+
+    cp {{borg_executable}} {{borg_install_path}}/borg
+  args:
+    creates: "{{borg_install_path}}/borg"
+  become: "{{borg_install_become}}"

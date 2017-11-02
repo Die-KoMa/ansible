@@ -1,0 +1,11 @@
+- name: Ensure the latest borg-wrapper with all variables filled in is present
+  template:
+    src: borg-wrapper.sh
+    dest: "{{borg_install_path}}/borg-wrapper"
+    mode: 0700
+
+- name: Ensure the latest borg-create is present
+  template:
+    src: borg-create.sh
+    dest: "{{borg_install_path}}/borg-create"
+    mode: a+x
