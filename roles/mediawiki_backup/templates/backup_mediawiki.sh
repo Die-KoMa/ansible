@@ -8,6 +8,7 @@ mw_ro_filename="{{mediawiki_ro_file}}"
 
 mw_lock_msg="Backup"
 mw_backup_name="mediawiki"
+mw_db_name="komapedia"
 
 lock () {
   mkdir "$mw_ro_lockdir"
@@ -30,6 +31,7 @@ dump_db () {
   local dump_dir="$(clean_dump_dir db)"
   echo "$dump_dir"
   echo dump_db
+  mysqldump --single-transaction "$mw_db_name" > "$dump_dir/dump_$(date -I).sql"
 }
 
 dump_content () {
@@ -49,6 +51,9 @@ backup () {
     exit 1
   fi
   echo "$mw_lock_msg" > "$mw_ro_lockdir/$mw_ro_filename"
+
+  # give everything time to finish
+  sleep 5
 
   dump_db
   dump_content
