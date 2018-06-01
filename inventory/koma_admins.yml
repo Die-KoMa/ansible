@@ -9,7 +9,7 @@ all:
       mmarx:
         password: $6$rounds=424242$If29MAgIOTOY9$mi2kyooy/lzIR6F9YPQo0bnkfjpBIdFswHbwgn2yxfqAnOwgni7TLGGk2HCUldG0T1Z7Qu9mhYaNdm0EJkJl6.
         shell: /bin/zsh
-        ssh-pubkeys:
+        ssh_pubkeys:
         - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIB8FCFThGOBFw6kGprgqlLU6bylvanxmZtgBUAS2sJcT mmarx@korenchkin
         - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICM97cpt3/r5P8qD5j5zk3XOs3NJO4tTQPAqef33xBYL mmarx@delacroix
         - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDTNg0F28iqAxuK5S+blmXv4HwrZcYVtfIZwL/vsU1XU mmarx@polito
