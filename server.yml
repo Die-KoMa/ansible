@@ -1,0 +1,20 @@
+- hosts: server
+  tasks:
+
+  - name: ensure the koma-admin group is present
+    group:
+      name: koma-admin
+      state: present
+    become: yes
+
+  - name: ensure the koma-admins are present on the system
+    include_role:
+      name: user
+    vars:
+      user_name: "{{ admin_name }}"
+      user_shell: "{{ koma_admins[admin_name].shell | default(omit) }}"
+      user_ssh_keys: "{{ koma_admins[admin_name].ssh_pubkeys | default(False) }}"
+      user_password: "{{ koma_admins[admin_name].password | default(omit) }}"
+    loop: "{{ koma_admins.keys() | list }}"
+    loop_control:
+      loop_var: admin_name

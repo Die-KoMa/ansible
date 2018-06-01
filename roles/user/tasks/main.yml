@@ -1,0 +1,20 @@
+- name: ensure user "{{ user_name|mandatory }}" is present
+  user:
+    append: yes
+    name: "{{ user_name }}"
+    createhome: yes
+    shell: "{{ user_shell }}"
+    groups: koma-admin
+    password: "{{ user_password|default(omit) }}"
+  become: yes
+
+- name: ensure authorized ssh keys for user "{{ user_name|mandatory }}" is present
+  authorized_key:
+    exclusive: yes
+    key: "
+    {%- for key in user_ssh_keys %}
+    {{- key }}
+    {% endfor %}"
+    user: "{{ user_name|mandatory }}"
+  become: yes
+  when: user_ssh_keys is defined and user_ssh_keys

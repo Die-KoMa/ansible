@@ -18,7 +18,11 @@ all:
         61653938646464346662346430666166346663303732393530643733353732356266
     janbeinke.com:
       borg_user: bup
+    honigkuchenpferd.cs.upb.de: {}
   children:
     backup:
       hosts:
         janbeinke.com
+    server:
+      hosts:
+        honigkuchenpferd.cs.upb.de
