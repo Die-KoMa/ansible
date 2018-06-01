@@ -7,6 +7,14 @@
       state: present
     become: yes
 
+  - name: ensure the koma-admins have sudoers permissions
+    template:
+      src: sudo-koma-admin
+      dest: /etc/sudoers.d/koma-admin
+      validate: '/usr/sbin/visudo -cf %s'
+    become: yes
+
+
   - name: ensure the koma-admins are present on the system
     include_role:
       name: user
