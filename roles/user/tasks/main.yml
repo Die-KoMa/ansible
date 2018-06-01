@@ -11,10 +11,7 @@
 - name: ensure authorized ssh keys for user "{{ user_name|mandatory }}" is present
   authorized_key:
     exclusive: yes
-    key: "
-    {%- for key in user_ssh_keys %}
-    {{- key }}
-    {% endfor %}"
+    key: "{{ user_ssh_keys | join('\n') }}"
     user: "{{ user_name|mandatory }}"
   become: yes
   when: user_ssh_keys is defined and user_ssh_keys
