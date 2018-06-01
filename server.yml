@@ -26,3 +26,7 @@
     loop: "{{ koma_admins.keys() | list }}"
     loop_control:
       loop_var: admin_name
+
+- hosts: server
+  roles:
+  - role: haproxy

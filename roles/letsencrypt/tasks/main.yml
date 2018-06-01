@@ -1,0 +1,61 @@
+- name: Ensure the certbot is present
+  package:
+    name: certbot
+    state: present
+  become: yes
+
+- name: Ensure the certbot cli configuration is up to date
+  template:
+    src: cli.ini
+    dest: /etc/letsencrypt/cli.ini
+    backup: yes
+  become: yes
+  notify: certbot
+
+- name: Ensure the letsencrypt run script is present
+  template:
+    src: letsencrypt_run.sh
+    dest: /usr/local/sbin/letsencrypt_run
+    mode: a+rx
+  become: yes
+  notify: certbot
+
+- meta: flush_handlers
+
+- name: Ensure the letsencrypt crontab is up to date
+  block:
+
+  - name: Ensure the packaged crontab is gone
+    file:
+      path: /etc/cron.d/certbot
+      state: absent
+    become: yes
+
+  - name: Ensure the letsencrypt crontab env variable PATH is present
+    cron:
+      cron_file: letsencrypt
+      user: root
+      env: yes
+      name: PATH
+      value: /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+    become: yes
+
+  - name: Ensure the letsencrypt crontab env variable MAILTO is present
+    cron:
+      cron_file: letsencrypt
+      user: root
+      env: yes
+      name: MAILTO
+      value: "{{letsencrypt_email|mandatory}}"
+    become: yes
+
+  - name: Ensure the letsencrypt crontab job is present
+    cron:
+      cron_file: letsencrypt
+      user: root
+      name: letsencrypt
+      hour: "{{ 6 | random(start=3,seed=inventory_hostname) }}"
+      minute: "{{ 60 | random(seed=inventory_hostname) }}"
+      weekday: 0
+      job: letsencrypt_run
+    become: yes

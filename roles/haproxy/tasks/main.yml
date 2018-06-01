@@ -1,0 +1,48 @@
+- name: Ensure haproxy is present
+  package:
+    name: haproxy
+    state: present
+  become: yes
+
+- name: Ensure the haproxy config directory exists
+  file:
+    path: /etc/haproxy/conf.d
+    state: directory
+  become: yes
+
+- name: Ensure the haproxy base config is up to date
+  template:
+    src: "{{item}}"
+    dest: /etc/haproxy/conf.d/{{item}}
+    backup: yes
+    # Validation for split files does not work, even if they are syntacticly correct
+    # validate: '/usr/sbin/haproxy -c -f %s'
+  with_items:
+    - 30-defaults.cfg
+    - 40-https.cfg
+    - 30-global.cfg
+  become: yes
+  notify: Reconfigure haproxy
+
+- name: Ensure the error files are up to date
+  template:
+    src: "{{item}}"
+    dest: /etc/haproxy/errors/{{item}}
+    backup: yes
+  with_items:
+    - 400.http
+    - 403.http
+    - 408.http
+    - 500.http
+    - 502.http
+    - 503.http
+    - 504.http
+  become: yes
+  notify: Reload haproxy
+
+- name: Ensure haproxy is started and enabled
+  service:
+    name: haproxy
+    state: started
+    enabled: yes
+  become: yes

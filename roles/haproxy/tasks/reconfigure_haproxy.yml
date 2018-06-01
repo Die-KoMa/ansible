@@ -1,0 +1,23 @@
+- name: Aquire file list in /etc/haproxy/conf.d/
+  shell: find '/etc/haproxy/conf.d/' -maxdepth 1 -type f -name '*.cfg' | sort
+  register: haproxy_config_files
+  changed_when: no
+  become: yes
+
+- name: Aquire file contents for files in /etc/haproxy/conf.d/
+  slurp:
+    src: "{{item}}"
+  with_items:
+    - "{{haproxy_config_files.stdout_lines}}"
+  register: haproxy_config_file_contents
+  changed_when: no
+  become: yes
+
+- name: Ensure /etc/haproxy/haproxy.cfg is up to date
+  template:
+    src: haproxy.cfg
+    dest: /etc/haproxy/haproxy.cfg
+    backup: yes
+    validate: '/usr/sbin/haproxy -c -f %s'
+  notify: Reload haproxy
+  become: yes

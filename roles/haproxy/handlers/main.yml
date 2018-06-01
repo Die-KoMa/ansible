@@ -1,0 +1,8 @@
+- name: Reload haproxy
+  service:
+    name: haproxy
+    state: reloaded
+  become: yes
+
+- name: Reconfigure haproxy
+  include_tasks: reconfigure_haproxy.yml

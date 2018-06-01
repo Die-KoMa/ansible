@@ -26,3 +26,8 @@ all:
     server:
       hosts:
         honigkuchenpferd.cs.upb.de
+      vars:
+        letsencrypt_email: homepage@die-koma.org
+        letsencrypt_domains:
+        - honigkuchenpferd.cs.upb.de
+        - honigkuchenpferd.cs.uni-paderborn.de
