@@ -14,7 +14,7 @@ all:
         - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICM97cpt3/r5P8qD5j5zk3XOs3NJO4tTQPAqef33xBYL mmarx@delacroix
         - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDTNg0F28iqAxuK5S+blmXv4HwrZcYVtfIZwL/vsU1XU mmarx@polito
       jalea:
-        password: $6$rounds=42042$Tv71OP3owNHnwnUB$dmO/DiuRrIykz/4DlfKwhEPglaYleGzSlBGT4vW6eqV4qfKKFjnVeatIuFnmEWz1c9jkU/KXWzgax.AbVZ2R8
+        password: $6$rounds=424242$rDrHSET2KZGEnLOY$vLvwwosuAH1YSTZ07e1ZezGWXvIOnKrgnThDyqsNPUvyaRmeNr.BG/IoGwFqpQVkWjNMIZVZjxEPEX2dVPG7w/
         shell: /bin/zsh
         ssh_pubkeys:
         - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC3BOa8y5vmOtOVkemL6ca30/Fuu7OL24NyIvxyDphyJv82IS59J8bvJzmkyZsWvs5qK08ddEaXw8gY5N02+ItZAnfiBNZTJLH8D+ZUs6W9p78BYnL+DQiCm22lRFdqWrKF8pmpzSKyjIAhiRyOZuxzCJCYWV82wrMdjXSL6Tu/HehLAtdnT95qReRWdOQ/LCg9FfO9c0IE3PVQcIxEiYb3BcsbFiQUGmex3o95Dqc2ORG9UmaY6TdbataQwJGKy9i4SEvhXxDfPFPElNJzg2tlBqIavHueSlqnPItMXZ+GsQ6TKKOiRjKxt5PzOWSpxPDSJEkisa0io67P3BpQpZQH max@losMachinos
