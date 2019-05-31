@@ -1,18 +1,3 @@
-- name: Ensure borg is installed on the backup servers
-  hosts: backup
-
-  pre_tasks:
-  - name: Ensure User {{borg_user}} is present
-    user:
-      name: "{{borg_user}}"
-      home: "/home/{{borg_user}}"
-      createhome: true
-    become: true
-
-  roles:
-  - { role: borg-bin, borg_install_path: /usr/local/bin }
-
-
 - name: Ensure borg is installed with all scripts on valhalla
   hosts: valhalla.fs.tum.de
 
@@ -27,25 +12,14 @@
   tasks:
   - name: Ensure {{inventory_hostname}} can reach the backup server
     block:
+
     - name: Ensure the user has a proper ssh key
       user:
         name: "{{ansible_user_id}}"
         generate_ssh_key: true
         ssh_key_type: ed25519
         ssh_key_file: .ssh/bup_ed25519
-    - name: Read in the ssh-key
-      slurp:
-        src: .ssh/bup_ed25519.pub
-      register: backup_ssh_public_key
-    - name: Ensure the ssh-key is present on the backup-server
-      lineinfile:
-        line: "command=\"borg serve --restrict-to-repository {{borg_remote_path}}\",no-port-forwarding,no-X11-forwarding,no-pty,no-agent-forwarding,no-user-rc {{backup_ssh_public_key['content']|b64decode|trim}}"
-        path: "/home/{{borg_user}}/.ssh/authorized_keys"
-        regexp: "^command=\"borg serve --restrict-to-repository {{borg_remote_path}}"
-        create: true
-      delegate_to: "{{item}}"
-      with_items: "{{groups['backup']}}"
-      become: true
+
     - name: Ensure the ssh-key is present in the client config
       blockinfile:
         block: |
@@ -55,6 +29,7 @@
             IdentityFile ~/.ssh/bup_ed25519
         path: .ssh/config
         create: true
+
   - name: Ensure the borg repo is present
     shell: PATH=~/bin:$PATH borg-wrapper init -e repokey-blake2
     register: borg_init_result

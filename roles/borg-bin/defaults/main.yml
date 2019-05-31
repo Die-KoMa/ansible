@@ -1,8 +1,0 @@
-borg_version: 1.1.0
-borg_executable: borg-linux64
-
-borg_install_path: /usr/bin
-borg_install_become: true
-
-borg_gpg_fingerprint: 6D5BEF9ADD2075805747B70F9F88FB52FAF7B393
-borg_gpg_keyring: ~/.gnupg/keyring_borg.gpg

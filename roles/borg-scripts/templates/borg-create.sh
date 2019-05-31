@@ -6,6 +6,7 @@ borg-wrapper \
   create \
   -v \
   --stats \
+  --compress zstd,20 \
   ::$1'-{now:%Y-%m-%d-%H:%M}' \
   "${@:2}"
 

@@ -1,0 +1,2 @@
+- src: https://github.com/thelegy/ansible-borg-bin
+  name: borg-bin
