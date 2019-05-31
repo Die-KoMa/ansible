@@ -1,3 +1,0 @@
-dependencies:
-- role: letsencrypt
-  use_haproxy: yes
