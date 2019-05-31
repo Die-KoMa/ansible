@@ -1,3 +1,3 @@
 - name: certbot
-  command: /usr/local/sbin/letsencrypt_run
+  command: /usr/local/sbin/letsencrypt_run --force-renewal
   become: yes
