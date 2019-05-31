@@ -29,4 +29,30 @@
 
 - hosts: server
   roles:
-  - role: haproxy
+
+  # Certificate
+  - role: letsencrypt
+    letsencrypt_staging: no
+    letsencrypt_email: homepage@die-koma.org
+    letsencrypt_domains:
+    - die-koma.org
+    - 51.die-koma.org
+    - de.komapedia.org
+    - honigkuchenpferd.cs.uni-paderborn.de
+    - honigkuchenpferd.cs.upb.de
+    - komapedia.org
+    - twitterwall.die-koma.org
+    letsencrypt_use_cert_update_script: yes
+
+  - role: shepherd
+
+  - role: koma-website
+    vars:
+      koma_website_domains:
+      - die-koma.org
+      - 51.die-koma.org
+      - honigkuchenpferd.cs.uni-paderborn.de
+      - honigkuchenpferd.cs.upb.de
+
+  - role: twitterwall
+
