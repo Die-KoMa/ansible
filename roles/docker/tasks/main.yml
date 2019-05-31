@@ -1,0 +1,51 @@
+- block:
+
+
+  - name: Ensure dependencies are installed
+    package:
+      name: "{{item}}"
+      state: present
+    with_items:
+    - apt-transport-https
+    - ca-certificates
+    - gnupg2
+    - software-properties-common
+
+  - name: Ensure the proper gpg-key is present in the apt
+    apt_key:
+      id: "{{docker_gpg_fingerprint}}"
+      keyserver: keyserver.ubuntu.com
+
+  - name: Ensure the proper repository is known to apt
+    apt_repository:
+      repo: deb [arch=amd64] https://download.docker.com/linux/debian {{ansible_distribution_release}} stable
+      state: present
+
+  - name: Ensure docker is installed
+    apt:
+      name: docker-ce
+      update_cache: yes
+
+  - name: Ensure docker is stated and enabled
+    service:
+      name: docker
+      state: started
+      enabled: yes
+
+  - name: Ensure pip2 is installed
+    package:
+      name: python-pip
+      state: present
+
+  - name: Ensure docker-py is installed
+    pip:
+      name: docker
+
+  - name: Initialize a new local swarm
+    command: docker swarm init --advertise-addr 127.0.0.1 --listen-addr 127.0.0.1
+    ignore_errors: yes
+
+
+  become: yes
+  tags:
+  - docker
