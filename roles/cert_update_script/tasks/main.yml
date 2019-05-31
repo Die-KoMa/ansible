@@ -1,0 +1,21 @@
+- block:
+
+
+  - name: Ensure the cert update dir is present
+    file:
+      dest: /etc/ssl/update.hooks
+      state: directory
+
+  - name: Ensure the cert update script is present
+    template:
+      src: cert_update.sh
+      dest: /etc/ssl/update_hook
+      mode: 0755
+
+
+  become: yes
+  tags:
+  - cert-update-script
+  - cert-update
+  - certificate
+  - cert
