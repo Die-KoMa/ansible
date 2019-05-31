@@ -1,0 +1,24 @@
+- block:
+
+
+  - name: ensure the koma-website service is present
+    docker_swarm_service:
+      name: koma-website
+      image: diekoma/die-koma.org
+      publish:
+      - published_port: "{{ koma_website_internal_port }}"
+        target_port: 80
+      restart_policy: any
+      replicas: "{{ koma_website_replicas }}"
+
+  - name: ensure the haproxy for the koma-website is up to date
+    template:
+      src: 50-die-koma.org.cfg
+      dest: /etc/haproxy/conf.d/50-die-koma.org.cfg
+    become: yes
+    notify: "Reconfigure haproxy"
+
+
+  become: yes
+  tags:
+  - website

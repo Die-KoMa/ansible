@@ -1,0 +1,4 @@
+koma_website_service_name: koma-website
+koma_website_image: diekoma/die-koma.org
+koma_website_internal_port: 8080
+koma_website_replicas: 2
