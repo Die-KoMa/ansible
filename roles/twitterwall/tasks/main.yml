@@ -1,0 +1,37 @@
+- block:
+
+
+  - name: ensure the twitterwall config files are present
+    template:
+      src: "{{ item }}"
+      dest: /etc/koma_bot/
+    loop:
+    - koma_bot.yml
+    - koma_bot_sounds.yml
+    notify: "Restart Twitterwall"
+
+  - name: ensure the twitterwall service is present
+    docker_swarm_service:
+      name: twitterwall
+      image: kerwindena/koma-bot
+      mounts:
+      - source: /etc/koma_bot/
+        target: /etc/koma_bot/
+        readonly: yes
+      publish:
+      - published_port: 8043
+        target_port: 8000
+      restart_policy: any
+
+  - name: ensure the haproxy for the twitterwall is up to date
+    template:
+      src: twitterwall.die-koma.org.cfg
+      dest: /etc/haproxy/conf.d/50-twitterwall.die-koma.org.cfg
+    become: yes
+    notify: "Reconfigure haproxy"
+
+
+  become: yes
+  tags:
+  - twitter
+  - twitterwall
