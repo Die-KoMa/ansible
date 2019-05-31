@@ -1,0 +1,20 @@
+- block:
+
+  - name: ensure the shepherd service is present
+    docker_swarm_service:
+      name: shepherd
+      image: mazzolino/shepherd:latest
+      constraints:
+      - "node.role==manager"
+      mounts:
+      - source: /var/run/docker.sock
+        target: /var/run/docker.sock
+        readonly: yes
+      env:
+      - SLEEP_TIME=30s
+      - BLACKLIST_SERVICES="shepherd"
+
+  become: yes
+  tags:
+  - docker
+  - shepherd
