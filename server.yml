@@ -48,6 +48,7 @@
     - file.komapedia.org
     - twitterwall.die-koma.org
     - die-reso.org
+    - reso.die-orga.org
     letsencrypt_use_cert_update_script: yes
 
   - role: shepherd
