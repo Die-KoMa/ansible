@@ -1,0 +1,50 @@
+- block:
+
+
+  - name: ensure the configuration dir is present
+    file:
+      dest: /etc/komacloud/config
+      state: directory
+
+  - name: ensure the data dir is present
+    file:
+      dest: /etc/komacloud/data
+      state: directory
+
+  - name: deploy Nextcloud
+    docker_swarm_service:
+      name: nextcloud
+      image: nextcloud
+      mounts:
+      - type: volume
+        source: komacloud_upgradedir
+        target: /var/www/html  # Workaround, See https://github.com/nextcloud/docker/issues/489
+      - type: bind
+        source: /etc/komacloud/config
+        target: /var/www/html/config
+      - type: bind
+        source: /etc/komacloud/data
+        target: /var/www/html/data
+      env:
+      - MYSQL_HOST={{ komacloud_db_host|mandatory }}
+      - MYSQL_DATABASE={{ komacloud_db_name|mandatory }}
+      - MYSQL_USER={{ komacloud_db_user|mandatory }}
+      - MYSQL_PASSWORD={{ komacloud_db_password|mandatory }}
+      - NEXTCLOUD_ADMIN_USER={{ komacloud_admin_user|mandatory }}
+      - NEXTCLOUD_ADMIN_PASSWORD={{ komacloud_admin_password|mandatory }}
+      - NEXTCLOUD_TRUSTED_DOMAINS={{ komacloud_domains|mandatory|join(' ') }}
+      publish:
+      - published_port: 8282
+        target_port: 80
+
+  - name: ensure the haproxy for the nextcloud is up to date
+    template:
+      src: 50-nextcloud.cfg
+      dest: /etc/haproxy/conf.d/
+    notify: "Reconfigure haproxy"
+
+
+  become: yes
+  tags:
+  - cloud
+  - nextcloud

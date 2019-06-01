@@ -38,6 +38,8 @@
     - die-koma.org
     - www.die-koma.org
     - 51.die-koma.org
+    - cloud.die-koma.org
+    - die-cloud.org
     - honigkuchenpferd.cs.uni-paderborn.de
     - honigkuchenpferd.cs.upb.de
     - komapedia.org
@@ -59,3 +61,5 @@
   - role: twitterwall
 
   - role: komapedia
+
+  - role: nextcloud
