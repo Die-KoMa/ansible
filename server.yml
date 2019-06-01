@@ -45,6 +45,7 @@
     - komapedia.org
     - de.komapedia.org
     - www.komapedia.org
+    - file.komapedia.org
     - twitterwall.die-koma.org
     letsencrypt_use_cert_update_script: yes
 
