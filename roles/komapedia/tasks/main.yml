@@ -21,6 +21,8 @@
     docker_swarm_service:
       name: komapedia
       image: diekoma/mediawiki
+      restart_config:
+        condition: any
       mounts:
       - type: bind
         source: /etc/komapedia/LocalSettings.php
