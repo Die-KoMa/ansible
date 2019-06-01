@@ -36,11 +36,13 @@
     letsencrypt_email: homepage@die-koma.org
     letsencrypt_domains:
     - die-koma.org
+    - www.die-koma.org
     - 51.die-koma.org
-    - de.komapedia.org
     - honigkuchenpferd.cs.uni-paderborn.de
     - honigkuchenpferd.cs.upb.de
     - komapedia.org
+    - de.komapedia.org
+    - www.komapedia.org
     - twitterwall.die-koma.org
     letsencrypt_use_cert_update_script: yes
 
@@ -56,3 +58,4 @@
 
   - role: twitterwall
 
+  - role: komapedia

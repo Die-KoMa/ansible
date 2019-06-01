@@ -1,0 +1,49 @@
+- block:
+
+
+  - name: ensure the LocalSettings.php is up to date
+    template:
+      src: LocalSettings.php
+      dest: /etc/komapedia/
+    notify: "Restart mediawiki"
+
+  - name: ensure the smw.json is present
+    file:
+      dest: /etc/komapedia/smw.json
+      state: touch
+
+  - name: ensure the readonly dir is present
+    file:
+      dest: /etc/komapedia/readonly
+      state: directory
+
+  - name: deploy Komapedia
+    docker_swarm_service:
+      name: komapedia
+      image: diekoma/mediawiki
+      mounts:
+      - type: bind
+        source: /etc/komapedia/LocalSettings.php
+        target: /var/www/html/LocalSettings.php
+      - type: bind
+        source: /etc/komapedia/smw.json
+        target: /var/www/html/extensions/SemanticMediaWiki/.smw.json
+      - type: bind
+        source: /etc/komapedia/readonly
+        target: /var/www/html/ReadOnly
+      publish:
+      - published_port: 8181
+        target_port: 80
+
+  - name: ensure the haproxy for the komapedia is up to date
+    template:
+      src: 50-komapedia.org.cfg
+      dest: /etc/haproxy/conf.d/
+    notify: "Reconfigure haproxy"
+
+
+  become: yes
+  tags:
+  - wiki
+  - mediawiki
+  - komapedia

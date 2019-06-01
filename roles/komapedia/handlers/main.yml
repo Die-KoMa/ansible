@@ -1,0 +1,4 @@
+---
+- name: Restart mediawiki
+  command: docker service update komapedia
+  become: yes
