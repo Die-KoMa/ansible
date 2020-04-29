@@ -11,11 +11,11 @@ error_reporting( 0 );
 ini_set( 'display_errors', 0 );
 
 ## Debug
- error_reporting( -1 );
- ini_set( 'display_errors', 1 );
- $wgShowDebug = true;
- $wgShowExceptionDetails = true;
- $wgShowDBErrorBacktrace = true;
+ // error_reporting( -1 );
+ // ini_set( 'display_errors', 1 );
+ // $wgShowDebug = true;
+ // $wgShowExceptionDetails = true;
+ // $wgShowDBErrorBacktrace = true;
 
 ## Uncomment this to disable output compression
 # $wgDisableOutputCompression = true;
@@ -37,7 +37,7 @@ $wgSitename = "KoMapedia";
 ## For more information on customizing the URLs
 ## (like /w/index.php/Page_title to /wiki/Page_title) please see:
 ## https://www.mediawiki.org/wiki/Manual:Short_URL
-$wgScriptPath = "/wiki/";
+$wgScriptPath = "/wiki";
 
 ## The protocol and server name to use in fully-qualified URLs
 $wgServer = "https://komapedia.org";

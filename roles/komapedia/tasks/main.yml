@@ -17,6 +17,21 @@
       dest: /etc/komapedia/readonly
       state: directory
 
+  - name: ensure the files dir is present
+    file:
+      dest: /srv/komapedia/files
+      state: directory
+
+  - name: ensure the cache dir is present
+    file:
+      dest: /srv/komapedia/cache
+      state: directory
+
+  - name: ensure the assets dir is present
+    file:
+      dest: /srv/komapedia/assets
+      state: directory
+
   - name: deploy Komapedia
     docker_swarm_service:
       name: komapedia
@@ -33,6 +48,15 @@
       - type: bind
         source: /etc/komapedia/readonly
         target: /var/www/html/ReadOnly
+      - type: bind
+        source: /srv/komapedia/files
+        target: /var/www/html/images
+      - type: bind
+        source: /srv/komapedia/cache
+        target: /var/www/html/cache
+      - type: bind
+        source: /srv/komapedia/assets
+        target: /var/www/html/resources/assets
       publish:
       - published_port: 8181
         target_port: 80
