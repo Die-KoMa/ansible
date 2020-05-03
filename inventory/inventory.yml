@@ -5,10 +5,9 @@ all:
       mediawiki_path: /homewww/die-koma.org/wiki-beta
       mediawiki_ro_lock_dir: ReadOnly
       mediawiki_ro_file: msg
-      borg_user: bup
+      borg_user: borg
       borg_host: borg-backup
-      borg_remote_path: ~/koma-valhalla
-      borg_repo: bup@janbeinke.com:~/koma
+      borg_remote_path: .
       borg_password: !vault |
         $ANSIBLE_VAULT;1.1;AES256
         66346563386234616434356563306363653031393863613861643461383033663030353361656366
@@ -17,7 +16,7 @@ all:
         3761653638323564620a313366643537323237613330656333666261316336316563303633383933
         31363163363261363637333135346665396432353162373661396638656663353834
     backup.0jb.de:
-      borg_user: bup
+      borg_user: borg
     honigkuchenpferd.cs.upb.de: {}
   children:
     backup:
