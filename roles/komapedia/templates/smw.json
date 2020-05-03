@@ -1,4 +1,4 @@
 {"komapedia":
- {"populate.smw_hash_field_complete": true,
-  "upgrade_key": "{{ komapedia_smw_upgrade_key|mandatory }}"}
+ {"populate.smw_hash_field_complete": true},
+ "upgradeKey": "{{ komapedia_smw_upgrade_key|mandatory }}"
 }
