@@ -46,7 +46,6 @@
     - de.komapedia.org
     - www.komapedia.org
     - file.komapedia.org
-    - twitterwall.die-koma.org
     - die-reso.org
     - reso.die-orga.org
     - koroma.die-orga.org
@@ -61,8 +60,6 @@
       - 51.die-koma.org
       - honigkuchenpferd.cs.uni-paderborn.de
       - honigkuchenpferd.cs.upb.de
-
-  - role: twitterwall
 
   - role: komapedia
 
