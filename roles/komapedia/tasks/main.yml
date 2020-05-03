@@ -7,10 +7,11 @@
       dest: /etc/komapedia/
     notify: "Restart mediawiki"
 
-  - name: ensure the smw.json is present
-    file:
+  - name: ensure the smw.json is present and up to date
+    template:
+      src: smw.json
       dest: /etc/komapedia/smw.json
-      state: touch
+    notify: "Restart mediawiki"
 
   - name: ensure the readonly dir is present
     file:

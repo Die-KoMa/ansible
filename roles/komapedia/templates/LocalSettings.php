@@ -173,6 +173,12 @@ $wgNamespacesWithSubpages[NS_TEMPLATE] = true;
 
 # Semantic MediaWiki extension is very cool
 require_once "$IP/extensions/SemanticMediaWiki/SemanticMediaWiki.php";
+/**
+ * It is strongly recommended to not change the setting of
+ * this function after the initial setup of the wiki, not even if you
+ * switch from "http://" to "https://" or to a completely different
+ * domain like e.g. <example.org> to <beispiel.de>.
+ */
 enableSemantics( 'old.die-koma.org' );
 $wgFooterIcons['poweredby']['semanticmediawiki'] = false;
 
