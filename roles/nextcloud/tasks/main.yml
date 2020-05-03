@@ -8,7 +8,7 @@
 
   - name: ensure the data dir is present
     file:
-      dest: /etc/komacloud/data
+      dest: /srv/komacloud/data
       state: directory
 
   - name: deploy Nextcloud
@@ -25,7 +25,7 @@
         source: /etc/komacloud/config
         target: /var/www/html/config
       - type: bind
-        source: /etc/komacloud/data
+        source: /srv/komacloud/data
         target: /var/www/html/data
       env:
       - MYSQL_HOST={{ komacloud_db_host|mandatory }}
