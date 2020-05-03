@@ -5,9 +5,9 @@ server:
     - die-cloud.org
 
     komacloud_quicklinks:
-      koma82: /s/NQs2jSinHz9SRRi
-      koma84: /s/rgi8mTxNEY3byFC
-      koma85: /s/rXiGj3LK9fXGJ7N
+      koma82: /s/zWb6fCRxwbYE7Zj
+      koma84: /s/fqZFxSFiJGqMZF6
+      koma85: /s/dNjXwPRSiEFeJJY
 
     komacloud_db_host: mariadb.cs.upb.de
     komacloud_db_name: komacloud
