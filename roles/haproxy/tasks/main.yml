@@ -11,6 +11,11 @@
       path: /etc/haproxy/conf.d
       state: directory
 
+  - name: Ensure the haproxy certs directory exists
+    file:
+      path: /etc/haproxy/certs
+      state: directory
+
   - name: Ensure the haproxy base config is up to date
     template:
       src: "{{item}}"
