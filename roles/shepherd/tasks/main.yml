@@ -4,8 +4,9 @@
     docker_swarm_service:
       name: shepherd
       image: mazzolino/shepherd:latest
-      constraints:
-      - "node.role==manager"
+      placement:
+        constraints:
+        - "node.role==manager"
       mounts:
       - source: /var/run/docker.sock
         target: /var/run/docker.sock

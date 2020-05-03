@@ -8,7 +8,8 @@
       publish:
       - published_port: "{{ koma_website_internal_port }}"
         target_port: 80
-      restart_policy: any
+      restart_config:
+        condition: any
       replicas: "{{ koma_website_replicas }}"
 
   - name: ensure the haproxy for the koma-website is up to date
