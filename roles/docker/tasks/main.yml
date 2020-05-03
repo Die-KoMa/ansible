@@ -32,14 +32,10 @@
       state: started
       enabled: yes
 
-  - name: Ensure pip2 is installed
+  - name: Ensure python3-Docker is installed
     package:
-      name: python-pip
+      name: python3-docker
       state: present
-
-  - name: Ensure docker-py is installed
-    pip:
-      name: docker
 
   - name: Initialize a new local swarm
     command: docker swarm init --advertise-addr 127.0.0.1 --listen-addr 127.0.0.1
