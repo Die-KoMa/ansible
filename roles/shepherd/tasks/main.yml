@@ -12,7 +12,7 @@
         target: /var/run/docker.sock
         readonly: yes
       env:
-      - SLEEP_TIME=30s
+      - SLEEP_TIME=30m
       - BLACKLIST_SERVICES="shepherd"
 
   become: yes
