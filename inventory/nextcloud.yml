@@ -1,8 +1,8 @@
 server:
   vars:
     komacloud_domains:
-    - cloud.die-koma.org
-    - die-cloud.org
+      - cloud.die-koma.org
+      - die-cloud.org
 
     komacloud_quicklinks:
       public: /s/Li2bQd4q5p8NMCR
@@ -29,6 +29,7 @@ server:
       koma83: /s/sxdwt5BbB2Tjo4L
       koma84: /s/fqZFxSFiJGqMZF6
       koma85: /s/dNjXwPRSiEFeJJY
+      koma86: /s/4gFEg854HSJoZtf
 
     komacloud_db_host: mariadb.cs.upb.de
     komacloud_db_name: komacloud
