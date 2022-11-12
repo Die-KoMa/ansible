@@ -65,13 +65,19 @@ $wgEnotifWatchlist = true; # UPO
 $wgEmailAuthentication = true;
 
 ## Database settings
-$wgDBtype = "mysql";
-$wgDBserver = '{{ komapedia_db_host|mandatory }}';
-$wgDBname = '{{ komapedia_db_name|mandatory }}';
-$wgDBuser = '{{ komapedia_db_user|mandatory }}';
-$wgDBpassword = '{{ komapedia_db_password|mandatory }}';
+$wgDBservers = [
+    [
+        'host' => '{{ komapedia_db_host|mandatory }}',
+        'dbname' => '{{ komapedia_db_name|mandatory }}',
+        'user' => '{{ komapedia_db_user|mandatory }}',
+        'password' => '{{ komapedia_db_password|mandatory }}',
+        'type' => 'mysql',
+        'flags' => DBO_DEFAULT | DBO_SSL,
+        'load' => 0,
+    ]
+];
 
-# MySQL specific settings
+# “If you switch to this, ensure you either keep $wgDBname,$wgDBprefix and$wgDBTableOptions set […]”
 $wgDBprefix = "";
 
 # MySQL table options to use during installation or update
