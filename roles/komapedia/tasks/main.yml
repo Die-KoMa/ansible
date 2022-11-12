@@ -36,7 +36,7 @@
   - name: deploy Komapedia
     docker_swarm_service:
       name: komapedia
-      image: diekoma/mediawiki
+      image: "diekoma/mediawiki:latest"
       restart_config:
         condition: any
       mounts:
