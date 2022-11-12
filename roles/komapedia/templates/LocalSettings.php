@@ -72,8 +72,9 @@ $wgDBservers = [
         'user' => '{{ komapedia_db_user|mandatory }}',
         'password' => '{{ komapedia_db_password|mandatory }}',
         'type' => 'mysql',
-        'flags' => DBO_DEFAULT | DBO_SSL,
+        'flags' => DBO_DEFAULT,
         'load' => 0,
+        'sslCAPath' => '/etc/ssl/certs/',
     ]
 ];
 
